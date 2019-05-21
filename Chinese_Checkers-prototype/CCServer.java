@@ -109,10 +109,10 @@ public class CCServer {
                 
                 int currentPlayer;
                 //gameBoard.setMode(5);
-                //System.out.println(gameBoard.getMode());
+                System.out.println(gameBoard.getMode());
                 while(true){
-                    
-                    if (gameBoard.getMode() != -1){
+                    System.out.println(gameBoard.getMode());
+                    if (gameBoard.getMode()){
                         System.out.println(gameBoard.getMode());
                         
                         currentPlayer = gameBoard.getCurrPlayer();

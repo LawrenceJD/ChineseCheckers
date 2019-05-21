@@ -97,9 +97,9 @@ public class Board extends JPanel {
         
         //////////////////////////////////////////////////////////////////////
         // Returns the value of gMode
-        public int getMode() {
+        public boolean getMode() {
             //System.out.println(gMode);
-            return gMode;
+            return endTurn.isVisible();
         }
         
         //////////////////////////////////////////////////////////////////////
