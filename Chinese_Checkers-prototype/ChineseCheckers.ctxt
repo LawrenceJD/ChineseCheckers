@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=ChineseCheckers
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=hostN\ portNum
+comment2.target=ChineseCheckers(java.lang.String,\ int)
+comment3.params=
+comment3.target=void\ run()
+numComments=4
