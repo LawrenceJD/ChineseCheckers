@@ -129,14 +129,22 @@ public class CCServer {
                     if (currentPlayer != playerColor){
                         isTurn = false;
                         layerUI.installUI(jlayer);
+                        
+                        System.out.println("pass4");
 
-                        out.writeObject(gameBoard);
+                        out.writeObject(gameBoard); //Throws IOException when it tries to execute this line.
+                        System.out.println("pass5");
                         out.reset();
+                        //out.flush();
 
                         while (true){
-                            gameBoard = (Board) in.readObject();
-                            if (gameBoard.getCurrPlayer() == playerColor)
-                                break;
+                            System.out.println("pass3");
+                            if(in.available() > 0){
+                                System.out.println("pass2");
+                                gameBoard = (Board) in.readObject();
+                                if (gameBoard.getCurrPlayer() == playerColor)
+                                    break;
+                            }
                         }
                         //gameBoard = inBoard;
 

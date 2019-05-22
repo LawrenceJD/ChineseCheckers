@@ -7,6 +7,7 @@
  */
 
 import java.util.*;
+import java.io.*;
 
 import java.net.URL;
 
@@ -30,7 +31,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 
-public class Board extends JPanel {
+public class Board extends JPanel implements Serializable{
 
         private int BOARD_SIZE = 620;
         private JLabel gb [] = new JLabel[121]; /*Represents all board spaces, and 

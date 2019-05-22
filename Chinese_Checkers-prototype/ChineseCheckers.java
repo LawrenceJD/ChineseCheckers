@@ -98,25 +98,32 @@ public class ChineseCheckers extends JFrame {
                 Board inBoard;
                 
                 while (true){
-                            gameBoard = (Board) in.readObject();
-                            if (gameBoard.getCurrPlayer() == playerColor)
+                            if(in.available() > 0){
+                                gameBoard = (Board) in.readObject();
+                                jlayer.repaint();
                                 break;
+                            }
                         }
                 //gameBoard = inBoard;
+                System.out.println("pass1");
                 playerColor = gameBoard.getCurrPlayer();
 
                 while(true){
                     if (gameBoard.getCurrPlayer() != playerColor){
                         //isTurn = false;
                         layerUI.uninstallUI(jlayer);
+                        jlayer.repaint();
 
                         out.writeObject(gameBoard);
                         out.reset();
+                        //out.flush();
 
                         while (true){
-                            gameBoard = (Board) in.readObject();
-                            if (gameBoard.getCurrPlayer() == playerColor)
-                                break;
+                            if(in.available() > 0){
+                                gameBoard = (Board) in.readObject();
+                                if (gameBoard.getCurrPlayer() == playerColor)
+                                    break;
+                            }
                         }
                         
                         layerUI.installUI(jlayer);
