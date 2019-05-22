@@ -71,7 +71,7 @@ public class ChineseCheckers extends JFrame {
         ObjectInputStream in = new ObjectInputStream(kkSocket.getInputStream());
         Scanner scan = new Scanner(System.in);
         ) {
-            boolean isTurn = true;
+            //boolean isTurn = true;
             Board gameBoard = new Board();
             int playerColor = 0;
 
@@ -81,7 +81,7 @@ public class ChineseCheckers extends JFrame {
             EventQueue.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                        JFrame frame = new JFrame("Chinese Checkers");
+                        JFrame frame = new JFrame("Chinese Checkers 2");
                         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                         frame.setLayout(new BorderLayout());
 
@@ -91,26 +91,34 @@ public class ChineseCheckers extends JFrame {
                         frame.setVisible(true);
                         frame.setResizable(false);
 
-                        layerUI.uninstallUI(jlayer);
                     }
                 });
             //Step #5: The client recieves a message from the server.
             try {
-                gameBoard = (Board) in.readObject();
+                Board inBoard;
+                
+                while (true){
+                            gameBoard = (Board) in.readObject();
+                            if (gameBoard.getCurrPlayer() == playerColor)
+                                break;
+                        }
+                //gameBoard = inBoard;
                 playerColor = gameBoard.getCurrPlayer();
 
                 while(true){
                     if (gameBoard.getCurrPlayer() != playerColor){
-                        isTurn = false;
+                        //isTurn = false;
                         layerUI.uninstallUI(jlayer);
 
                         out.writeObject(gameBoard);
                         out.reset();
 
-                        while (!isTurn){
+                        while (true){
                             gameBoard = (Board) in.readObject();
+                            if (gameBoard.getCurrPlayer() == playerColor)
+                                break;
                         }
-
+                        
                         layerUI.installUI(jlayer);
                     }
 

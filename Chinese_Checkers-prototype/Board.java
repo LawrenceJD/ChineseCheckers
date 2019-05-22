@@ -99,7 +99,7 @@ public class Board extends JPanel {
         // Returns the value of gMode
         public boolean getMode() {
             //System.out.println(gMode);
-            return endTurn.isVisible();
+            return optionMouseHandler.optGetMode();
         }
         
         //////////////////////////////////////////////////////////////////////
@@ -1364,6 +1364,10 @@ public class Board extends JPanel {
                     gameStarted = true;
                     hideOptions();
                 }
+            }
+            
+            public boolean optGetMode() {
+                return endTurn.isVisible();
             }
 
             public void mouseReleased(MouseEvent e) { }

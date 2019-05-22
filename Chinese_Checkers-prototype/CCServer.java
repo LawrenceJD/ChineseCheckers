@@ -93,7 +93,7 @@ public class CCServer {
             EventQueue.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                        JFrame frame = new JFrame("Chinese Checkers");
+                        JFrame frame = new JFrame("Chinese Checkers 1");
                         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                         frame.setLayout(new BorderLayout());
 
@@ -103,11 +103,13 @@ public class CCServer {
                         frame.setVisible(true);
                         frame.setResizable(false);
 
+                        layerUI.uninstallUI(jlayer);
                     }
                 });
             try {
                 
                 int currentPlayer;
+                Board inBoard;
                 //gameBoard.setMode(5);
                 System.out.println(gameBoard.getMode());
                 while(true){
@@ -126,16 +128,19 @@ public class CCServer {
                     currentPlayer = gameBoard.getCurrPlayer();
                     if (currentPlayer != playerColor){
                         isTurn = false;
-                        layerUI.uninstallUI(jlayer);
+                        layerUI.installUI(jlayer);
 
                         out.writeObject(gameBoard);
                         out.reset();
 
-                        while (!isTurn){
+                        while (true){
                             gameBoard = (Board) in.readObject();
+                            if (gameBoard.getCurrPlayer() == playerColor)
+                                break;
                         }
+                        //gameBoard = inBoard;
 
-                        layerUI.installUI(jlayer);
+                        layerUI.uninstallUI(jlayer);
                     }
 
                     if (gameBoard.getWinner() > -1)
